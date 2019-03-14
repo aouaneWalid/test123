@@ -1,0 +1,16 @@
+---
+# vars file for corretto
+
+corretoo_version: amazon-corretto-8.202.08.2-linux-x64.tar.gz                                
+download_url: https://d2znqt9b1bc64u.cloudfront.net
+download_folder: /opt                                                                     
+corretto_name : "{{download_folder}}/amazon-corretto-8.202.08.2-linux-x64"                    
+corretto_archive: "{{download_folder}}/{{corretoo_version}}"   
+
+
+#jdk_version: jdk-8u202-linux-x64.tar.gz
+#download_url:  https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e
+#download_folder: /opt
+#jdk_name : "{{download_folder}}/jdk1.8.0_202"
+#jdk_archive: "{{download_folder}}/{{jdk_version}}"
+

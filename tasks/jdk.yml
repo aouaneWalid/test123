@@ -1,0 +1,33 @@
+---
+- name: get jdk-8u202-linux-x64.tar.gz                                                                 
+  get_url:                                                                                             
+    url: "{{download_url}}/{{jdk_version}}"                                                       
+    dest: "{{download_folder}}"                                                                        
+    headers:                                                                                           
+      cookie: oraclelicense=accept-securebackup-cookie                                                 
+                                                                                                         
+- name: unpack archi                                                          
+  unarchive:                                                                                           
+    src: "{{jdk_archive}}"                                                                        
+    dest: "{{download_folder}}"                                                                        
+    remote_src: yes                                                                                    
+                                                                                                        
+- name:  Make Java available for system                                                                
+  command:  'update-alternatives --install "/usr/bin/java" "java" "{{jdk_name}}/bin/java" 1'      
+                                                                                                         
+- name: Make Javac available for system                                                                
+  command:  'update-alternatives --install "/usr/bin/javac" "javac" "{{jdk_name}}/bin/javac" 1' 
+
+- name: Set Java HOME
+  lineinfile:
+    dest=~/.bashrc regexp='^JAVA_HOME'>
+    line="export JAVA_HOME=/opt/jdk1.8.0_202/"
+
+- name: Set Java PATH
+  lineinfile: 
+    dest=~/.bashrc regexp='^JAVA_HOME'>
+    line="export PATH=$PATH:/opt/jdk1.8.0_202/bin"
+
+- name: Source bashrc
+  action: shell source ~/.bashrc
+  
